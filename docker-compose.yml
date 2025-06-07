@@ -1,0 +1,50 @@
+version: "3.6"
+
+services:
+  strapi:
+    image: cms
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      DATABASE_CLIENT: ${DATABASE_CLIENT}
+      DATABASE_HOST: strapi-db
+      DATABASE_NAME: ${DATABASE_NAME}
+      DATABASE_USERNAME: ${DATABASE_USERNAME}
+      DATABASE_PORT: ${DATABASE_PORT}
+      NODE_ENV: ${NODE_ENV}
+    command: npm run develop
+    depends_on:
+      - strapi-db
+    volumes:
+      - ./:/opt/app/
+    ports:
+      - 1337:1337
+    networks:
+      - cms-network
+
+  strapi-db:
+    image: postgres
+    restart: unless-stopped
+    env_file: .env
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
+      POSTGRES_DB: ${DATABASE_NAME}
+      POSTGRES_USER: ${DATABASE_USERNAME}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+    volumes:
+      - strapi-db-data:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+    networks:
+      - cms-network
+
+volumes:
+  strapi-db-data:
+
+networks:
+  cms-network:
+    external: true
+    name: cms-network
