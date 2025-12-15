@@ -23,4 +23,4 @@ RUN npm run build
 EXPOSE 1337
 
 # Comando padrão de inicialização
-CMD ["npm", "start"]
+CMD ["npm", "run", "start"]
