@@ -1,0 +1,77 @@
+{
+  "kind": "collectionType",
+  "collectionName": "imoveis",
+  "info": {
+    "singularName": "imovel",
+    "pluralName": "imoveis",
+    "displayName": "Imovel"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "id_externo": {
+      "type": "uid",
+      "required": true
+    },
+    "titulo": {
+      "type": "string"
+    },
+    "modelo": {
+      "type": "string"
+    },
+    "finalidade": {
+      "type": "string"
+    },
+    "valor": {
+      "type": "decimal"
+    },
+    "estado": {
+      "type": "string"
+    },
+    "cidade": {
+      "type": "string"
+    },
+    "bairro": {
+      "type": "string"
+    },
+    "endereco": {
+      "type": "string"
+    },
+    "link": {
+      "type": "string"
+    },
+    "foto": {
+      "type": "string"
+    },
+    "quarto": {
+      "type": "integer"
+    },
+    "banheiro": {
+      "type": "integer"
+    },
+    "guaragem": {
+      "type": "integer"
+    },
+    "area_total_m2": {
+      "type": "decimal"
+    },
+    "area_util_m2": {
+      "type": "decimal"
+    },
+    "valor_condominio": {
+      "type": "decimal"
+    },
+    "valor_iptu": {
+      "type": "decimal"
+    },
+    "description": {
+      "type": "richtext"
+    },
+    "ativo": {
+      "type": "boolean",
+      "default": true
+    }
+  }
+}

@@ -373,6 +373,108 @@ export interface AdminUser extends Struct.CollectionTypeSchema {
   };
 }
 
+export interface ApiClienteCliente extends Struct.CollectionTypeSchema {
+  collectionName: 'clientes';
+  info: {
+    displayName: 'Cliente';
+    pluralName: 'clientes';
+    singularName: 'cliente';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    bloqueado: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<false>;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::cliente.cliente'
+    > &
+      Schema.Attribute.Private;
+    nome: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    telefone: Schema.Attribute.UID & Schema.Attribute.Required;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiGeralGeral extends Struct.SingleTypeSchema {
+  collectionName: 'gerals';
+  info: {
+    displayName: 'Geral';
+    pluralName: 'gerals';
+    singularName: 'geral';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    informacoes_gerais: Schema.Attribute.RichText;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<'oneToMany', 'api::geral.geral'> &
+      Schema.Attribute.Private;
+    publishedAt: Schema.Attribute.DateTime;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+  };
+}
+
+export interface ApiImovelImovel extends Struct.CollectionTypeSchema {
+  collectionName: 'imoveis';
+  info: {
+    displayName: 'Imovel';
+    pluralName: 'imoveis';
+    singularName: 'imovel';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    area_total_m2: Schema.Attribute.Decimal;
+    area_util_m2: Schema.Attribute.Decimal;
+    ativo: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
+    bairro: Schema.Attribute.String;
+    banheiro: Schema.Attribute.Integer;
+    cidade: Schema.Attribute.String;
+    createdAt: Schema.Attribute.DateTime;
+    createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    description: Schema.Attribute.RichText;
+    endereco: Schema.Attribute.String;
+    estado: Schema.Attribute.String;
+    finalidade: Schema.Attribute.String;
+    foto: Schema.Attribute.String;
+    guaragem: Schema.Attribute.Integer;
+    id_externo: Schema.Attribute.UID & Schema.Attribute.Required;
+    link: Schema.Attribute.String;
+    locale: Schema.Attribute.String & Schema.Attribute.Private;
+    localizations: Schema.Attribute.Relation<
+      'oneToMany',
+      'api::imovel.imovel'
+    > &
+      Schema.Attribute.Private;
+    modelo: Schema.Attribute.String;
+    publishedAt: Schema.Attribute.DateTime;
+    quarto: Schema.Attribute.Integer;
+    titulo: Schema.Attribute.String;
+    updatedAt: Schema.Attribute.DateTime;
+    updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
+      Schema.Attribute.Private;
+    valor: Schema.Attribute.Decimal;
+    valor_condominio: Schema.Attribute.Decimal;
+    valor_iptu: Schema.Attribute.Decimal;
+  };
+}
+
 export interface PluginContentReleasesRelease
   extends Struct.CollectionTypeSchema {
   collectionName: 'strapi_releases';
@@ -882,6 +984,9 @@ declare module '@strapi/strapi' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'admin::user': AdminUser;
+      'api::cliente.cliente': ApiClienteCliente;
+      'api::geral.geral': ApiGeralGeral;
+      'api::imovel.imovel': ApiImovelImovel;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
       'plugin::i18n.locale': PluginI18NLocale;

@@ -1,0 +1,18 @@
+{
+  "kind": "singleType",
+  "collectionName": "gerals",
+  "info": {
+    "singularName": "geral",
+    "pluralName": "gerals",
+    "displayName": "Geral"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "informacoes_gerais": {
+      "type": "richtext"
+    }
+  }
+}
