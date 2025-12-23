@@ -38,9 +38,20 @@ export default ({ env }) => {
           cipher: env('DATABASE_SSL_CIPHER', undefined),
           rejectUnauthorized: env.bool('DATABASE_SSL_REJECT_UNAUTHORIZED', true),
         },
+        keepAlive: true,
+        keepAliveInitialDelayMillis: 10000,
         schema: env('DATABASE_SCHEMA', 'public'),
       },
-      pool: { min: env.int('DATABASE_POOL_MIN', 2), max: env.int('DATABASE_POOL_MAX', 10) },
+      pool: { 
+        min: env.int('DATABASE_POOL_MIN', 2), 
+        max: env.int('DATABASE_POOL_MAX', 10),
+        idleTimeoutMillis: 30000,      // mata conexões paradas
+        acquireTimeoutMillis: 60000,   // timeout pra pegar nova
+        reapIntervalMillis: 10000,     // limpa conexões mortas
+        createTimeoutMillis: 30000,
+        destroyTimeoutMillis: 5000,
+        validate: (conn) => conn && !conn._ending,
+      },
     },
     sqlite: {
       connection: {
